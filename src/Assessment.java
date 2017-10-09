@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Assessment {
 
     public static int square(int number) {
@@ -30,6 +32,40 @@ public class Assessment {
 
     }
 
+    public static ArrayList<User> capitalizeRecords(ArrayList<User> users) {
+
+        ArrayList<User> usersCopy = new ArrayList<>();
+
+        for (User user : users) {
+            usersCopy.add(new User(user.getFirstName(), user.getLastName(), user.isAdmin()));
+        }
+
+        for(User user : usersCopy) {
+
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+            String pattern = "[a-z].*";
+
+            if (firstName.matches(pattern)) {
+                firstName = capitalizeName(firstName);
+                user.setFirstName(firstName);
+            }
+
+            if (lastName.matches(pattern)) {
+                lastName = capitalizeName(lastName);
+                user.setLastName(lastName);
+            }
+
+        }
+
+        return usersCopy;
+
+    }
+
+    public static String capitalizeName(String nameToCapitalize) {
+        return nameToCapitalize.toUpperCase().charAt(0) + nameToCapitalize.substring(1).toLowerCase();
+    }
+
     public static void main(String[] args) {
 
         System.out.println(square(2));
@@ -37,6 +73,19 @@ public class Assessment {
         System.out.println(sum(1.2,2.3));
         System.out.println(average(new int[]{5, 10}));
 
+        ArrayList<User> theUsers = new ArrayList<>();
+        theUsers.add(new User("travis", "payne", true));
+        theUsers.add(new User("Bryce", "Payne", false));
+
+        ArrayList<User> capitalizedUsers = capitalizeRecords(theUsers);
+
+        for (User user : capitalizedUsers) {
+            user.sayHello();
+        }
+
+        for (User user : theUsers) {
+            user.sayHello();
+        }
     }
 
 }
