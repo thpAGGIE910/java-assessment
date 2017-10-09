@@ -1,4 +1,4 @@
-public class Person {
+public class Person implements Greeter {
 
     protected String firstName;
     protected String lastName;
@@ -50,5 +50,9 @@ public class Person {
 
         this.lastName = lastName;
 
+    }
+
+    public void sayHello() {
+        System.out.printf("Hello from %s %s\n", this.firstName, this.lastName);
     }
 }
